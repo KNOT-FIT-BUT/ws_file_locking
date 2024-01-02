@@ -17,9 +17,9 @@ class FileLock():
                 fcntl.flock(self.file_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
                 return self.file_lock
             
-            except IOError:
+            except IOError as err:
                 if not f_locked_msg:
-                    print("File locked, waiting...")
+                    print(f"File locked, waiting... ({err})")
                     f_locked_msg = True     
                 sleep(1)
                 continue
